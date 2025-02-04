@@ -5,7 +5,7 @@ outp = open('output.txt', "w", encoding="utf-8")
 idlist= list()
 string="//*"
 for j in range(182):
-    file1 =  'gmnd/FULLDownload_Part' + str(j+1) + '_Of_182_2024-10-01.xml'
+    file1 =  'gmdn/FULLDownload_Part' + str(j+1) + '_Of_182_2024-10-01.xml'
     print(file1)
     tree = etree.parse(file1)
     #outp.write("xxfile " + str(j+1) + "\n")
