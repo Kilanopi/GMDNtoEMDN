@@ -1,25 +1,39 @@
 from transformers import pipeline
 
 def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
-    back = ""
     #collect labels for classification
-    EMDNINPUT = open('EMDNoutput.txt', "r", encoding="utf-8")
-    EMDNLEAFS = open('EMDNleafs.txt', "r", encoding="utf-8")
+    EMDNLEAFS = open('PreProcessing/EMDNleafs.txt', "r", encoding="utf-8")
     gimmenext = False
-    rember = ""
     j = 1
-    leafDict = {}
+    leafList = []
     for line in EMDNLEAFS:
         if gimmenext:
-            leafDict[rember] = line.rstrip()
+            leafList.append(line.rstrip())
             gimmenext = False
         if j % 2 == 1 and line.rstrip().startswith(EMDNprefix):
             gimmenext = True
-            rember = line.rstrip()
         j = j + 1
 
-    names = classifier(GMDNname, candidate_labels=list(leafDict.values()))
-    descr = classifier(GMDNdesc, candidate_labels=list(leafDict.values()))
+    newlist = []
+    i = 0
+    for cat in leafList:  # TODO better to split the string -> radiOTHERapy
+        if "single-use" in GMDNname and "REUSABLE" in cat and not "SINGLE-USE" in cat:
+            newlist.append(cat)
+        elif "reusable" in GMDNname and "SINGLE-USE" in cat and not "REUSABLE" in cat:
+            newlist.append(cat)
+        elif "- OTHER" in cat or "- VARIOUS" in cat:
+            newlist.append(cat)
+        elif "IN OTHER CLASSES" in cat:
+            newlist.append(cat)
+        elif "NOT OTHERWISE CLASSIFIED" in cat:
+            newlist.append(cat)
+        i = i + 1
+    for cat in newlist:
+        if cat in leafList:
+            leafList.remove(cat)
+
+    names = classifier(GMDNname, candidate_labels=list(leafList))
+    descr = classifier(GMDNdesc, candidate_labels=list(leafList))
     topList = []
     for i in range(len(names["labels"])):
         topList.append(((names["scores"][i] + descr["scores"][i]) / 2, names["labels"][i]))

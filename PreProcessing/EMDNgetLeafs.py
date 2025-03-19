@@ -1,19 +1,19 @@
-inpt = open("EMDNoutput.txt","r", encoding="utf-8")
-outp = open('EMDNleafs.txt', "w", encoding="utf-8")
+inpt = open("PreProcessing/EMDNoutput.txt","r", encoding="utf-8")
+outp = open('PreProcessing/EMDNleafs.txt', "w", encoding="utf-8")
 
 def recme(prefix):
     leaflist=[]
     linenum=1
     inpt.seek(0)
-    next=False
+    nexts=False
     for liner in inpt.readlines():
-        if liner.rstrip() == "" and next:
+        if liner.rstrip() == "" and nexts:
             continue
         if liner.rstrip() == "":
-            next=True
+            nexts=True
         else:
-            next=False
-        if linenum % 3 == 1:
+            nexts=False
+        if linenum % 2 == 1:
             if liner.rstrip().startswith(prefix) and len(liner.rstrip()) == len(prefix) + 2:
                 leaflist.append(liner.rstrip())
         linenum=linenum+1

@@ -1,6 +1,5 @@
-inpt = open("EMDNoutput.txt","r", encoding="utf-8")
-outp = open('EMDN2ndLayer.txt', "w", encoding="utf-8")
-
+inpt = open("PreProcessing/EMDNoutput.txt","r", encoding="utf-8")
+outp = open('PreProcessing/EMDN2ndLayer.txt', "w", encoding="utf-8")
 
 #def ZndLayer():
 FirstList = []
@@ -21,7 +20,7 @@ for cat in FirstList:
             #print(rember)
             outp.write("\n")
             gimmenext = False
-        if j % 3 == 1 and line.rstrip().startswith(cat) and len(line.rstrip()) == 3:
+        if j % 2 == 1 and line.rstrip().startswith(cat) and len(line.rstrip()) == 3:
             gimmenext = True
             rember = line.rstrip()
         j=j+1
