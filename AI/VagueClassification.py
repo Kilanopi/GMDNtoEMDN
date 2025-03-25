@@ -2,6 +2,7 @@ from transformers import pipeline
 import math
 def nineCats(classifier, GMDNname, GMDNdesc):
     ZndLayer = open('PreProcessing/EMDN2ndLayer.txt', "r", encoding="utf-8")
+    Z12layer = open('PreProcessing/EMDNZ12.txt', "r", encoding="utf-8")
     EMDNINPUT = open('PreProcessing/EMDNoutput.txt', "r", encoding="utf-8")
     prelist = []
     for line in ZndLayer.readlines():
@@ -49,11 +50,14 @@ def nineCats(classifier, GMDNname, GMDNdesc):
         topList.append(((nameTop["scores"][i] + descTop["scores"][i]) / 2, nameTop["labels"][i]))
     topList.sort(reverse=True)
     topList = topList[0:9]
-    #i=0
-    #for thing in topList:
-    #    if thing[1] == "INSTRUMENTS FOR FUNCTIONAL EXPLORATIONS AND THERAPEUTIC INTERVENTIONS":
-    #        topList.remove(i) #TODO find a way to look through Z12 seperately
-    #    i=i+1
+    i=0
+    Z12=False
+    for thing in topList:
+        if thing[1] == "INSTRUMENTS FOR FUNCTIONAL EXPLORATIONS AND THERAPEUTIC INTERVENTIONS":
+            topList.pop(i) #TODO find a way to look through Z12 seperately
+            Z12 = True
+            break
+        i=i+1
 
     for thing in topList:
         ZndLayer.seek(0)
@@ -66,5 +70,29 @@ def nineCats(classifier, GMDNname, GMDNdesc):
                 if thing[1] == line.rstrip():
                     topList.append((thing[0], remember))
             k=k+1
-    topList = topList[9:18]
+    if not Z12:
+        topList = topList[9:18]
+    else:
+        topList = topList[8:17]
+        j = 1
+        ZcatList = []
+        for line in Z12layer:
+            if j % 2 == 0:
+                ZcatList.append(line.rstrip())
+            j = j + 1
+        nameTop = classifier(GMDNname, candidate_labels=ZcatList)
+        descTop = classifier(GMDNdesc, candidate_labels=ZcatList)
+        ZList = []
+        for i in range(len(nameTop["labels"])):
+            ZList.append(((nameTop["scores"][i] + descTop["scores"][i]) / 2, nameTop["labels"][i]))
+        ZList.sort(reverse=True)
+        top = ZList.pop(0)
+        Z12layer.seek(0)
+        member = ""
+        for line in Z12layer:
+            if line.rstrip() == top[1]:
+                top = (top[0], member)
+            member = line.rstrip()
+        topList.append(top)
+        topList.sort(reverse=True)
     return topList

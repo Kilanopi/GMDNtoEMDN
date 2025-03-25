@@ -40,7 +40,7 @@ bestNine = []
 for categ in listOfNine:
     curr = AI.LeafClassification.zeroShot(strongClassifier, GMDNname, GMDNdesc, categ[1])
     print(curr)
-    bestNine.append(((curr[0]+categ[0])/2 ,curr[1]))
+    bestNine.append(curr)
 
 bestNine.sort(reverse=True)
 print(bestNine)
