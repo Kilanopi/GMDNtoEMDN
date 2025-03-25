@@ -1,26 +1,12 @@
-from transformers import pipeline
-import math
 def nineCats(classifier, GMDNname, GMDNdesc):
     ZndLayer = open('PreProcessing/EMDN2ndLayer.txt', "r", encoding="utf-8")
     Z12layer = open('PreProcessing/EMDNZ12.txt', "r", encoding="utf-8")
-    EMDNINPUT = open('PreProcessing/EMDNoutput.txt', "r", encoding="utf-8")
-    prelist = []
-    for line in ZndLayer.readlines():
-        prelist.append(line.rstrip())
+    j = 1
     catlist = []
-    for cat in prelist:
-        EMDNINPUT.seek(0)
-        gimmenext = False
-        j = 1
-        for line in EMDNINPUT:
-            if gimmenext:
-                catlist.append(line.rstrip())
-                gimmenext = False
-            if j % 2 == 1 and line.rstrip().startswith(cat) and len(line.rstrip()) == 3:
-                gimmenext = True
-            j = j + 1
-
-
+    for line in ZndLayer:
+        if j % 2 == 0:
+            catlist.append(line.rstrip())
+        j = j + 1
     newlist = []
     i=0
     for cat in catlist: #TODO better to split the string -> radiOTHERapy

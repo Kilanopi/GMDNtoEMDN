@@ -1,6 +1,5 @@
 inpt = open("PreProcessing/EMDNoutput.txt","r", encoding="utf-8")
 outp = open('PreProcessing/EMDNleafs.txt', "w", encoding="utf-8")
-
 def recme(prefix):
     leaflist=[]
     linenum=1

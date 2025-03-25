@@ -3,7 +3,7 @@ from lxml import etree
 outp = open('PreProcessing/output.txt', "w", encoding="utf-8")
 idlist= list()
 string="//*"
-for j in range(182):
+for j in range(188):
     file1 =  'Input/20250304/FULLDownload_Part' + str(j+1) + '_Of_188_2025-03-03.xml' #TODO change this so it works with all dates
     print(file1)
     tree = etree.parse(file1)

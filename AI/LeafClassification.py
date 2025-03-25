@@ -1,5 +1,3 @@
-from transformers import pipeline
-
 def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
     #collect labels for classification
     EMDNLEAFS = open('PreProcessing/EMDNleafs.txt', "r", encoding="utf-8")

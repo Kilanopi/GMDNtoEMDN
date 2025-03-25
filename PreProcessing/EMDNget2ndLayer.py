@@ -24,7 +24,6 @@ for cat in FirstList:
             rember = line.rstrip()
         j=j+1
 
-
 inpt.seek(0)
 gimmenext = False
 rember = ""
