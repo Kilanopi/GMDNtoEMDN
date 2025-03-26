@@ -27,9 +27,7 @@ def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
             newlist.append(cat)
         i = i + 1
     for cat in newlist:
-        if cat in leafList:
-            leafList.remove(cat)
-
+        leafList.remove(cat)
     names = classifier(GMDNname, candidate_labels=list(leafList))
     descr = classifier(GMDNdesc, candidate_labels=list(leafList))
     topList = []
@@ -39,7 +37,7 @@ def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
     back = topList[0]
     EMDNLEAFS.seek(0)
     remember = ""
-    k=0
+    k=1
     for line in EMDNLEAFS.readlines():
         if k % 2 == 1:
             remember = line.rstrip()

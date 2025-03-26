@@ -25,8 +25,7 @@ def nineCats(classifier, GMDNname, GMDNdesc):
         i=i+1
 
     for cat in newlist:
-        if cat in catlist:
-            catlist.remove(cat)
+        catlist.remove(cat)
 
 
     nameTop = classifier(GMDNname, candidate_labels=catlist)
