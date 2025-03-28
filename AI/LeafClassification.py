@@ -11,7 +11,8 @@ def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
         if j % 2 == 1 and line.rstrip().startswith(EMDNprefix):
             gimmenext = True
         j = j + 1
-
+    if len(leafList) == 1:
+        return EMDNprefix
     newlist = []
     i = 0
     for cat in leafList:  # TODO better to split the string -> radiOTHERapy
@@ -45,5 +46,4 @@ def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
             if back[1] == line.rstrip():
                 back = (back[0], remember)
         k=k+1
-
     return back

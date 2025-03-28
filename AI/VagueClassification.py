@@ -23,11 +23,8 @@ def nineCats(classifier, GMDNname, GMDNdesc):
         elif ("reagent" not in GMDNname or "reagent" not in GMDNdesc) and "REAGENTS" in cat:
             newlist.append(cat)
         i=i+1
-
     for cat in newlist:
         catlist.remove(cat)
-
-
     nameTop = classifier(GMDNname, candidate_labels=catlist)
     descTop = classifier(GMDNdesc, candidate_labels=catlist)
     topList = []
@@ -43,7 +40,6 @@ def nineCats(classifier, GMDNname, GMDNdesc):
             Z12 = True
             break
         i=i+1
-
     for thing in topList:
         ZndLayer.seek(0)
         k=1

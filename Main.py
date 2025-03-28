@@ -17,9 +17,6 @@ def mapAI(n):
 
     #collect GMDN Input
     GMDNINPUT = open('PreProcessing/output.txt', "r", encoding="utf-8")
-    outtxtfile = 'fullmapping_' + str(int(itonum)) + '.txt'
-    MAPPING = open(outtxtfile, "w", encoding="utf-8")
-
     i1 = 1
     tempten = int(n)
     for line in GMDNINPUT:
@@ -39,9 +36,6 @@ def mapAI(n):
     print(GMDNdesc)
     print("")
 
-    #AI.OtherClassification.otherCat(strongClassifier, GMDNname, GMDNdesc, [(0.8065924644470215, 'L24'), (0.7723210155963898, 'L03'), (0.6678230166435242, 'L01'), (0.6496760547161102, 'L04'), (0.6374847888946533, 'V04'), (0.6147002577781677, 'X02'), (0.583263486623764, 'M02'), (0.5182857662439346, 'T03'), (0.504276692867279, 'Z1290')])
-    #exit()
-
     listOfNine = AI.VagueClassification.nineCats(strongClassifier, GMDNname, GMDNdesc)
     print(listOfNine)
 
@@ -49,19 +43,24 @@ def mapAI(n):
     for categ in listOfNine:
         curr = AI.LeafClassification.zeroShot(strongClassifier, GMDNname, GMDNdesc, categ[1])
         print(curr)
-        bestNine.append(curr)
+        if curr == categ[1]:
+            bestNine.append(categ)
+        else:
+            bestNine.append(curr)
 
     bestNine.sort(reverse=True)
     print(bestNine)
 
+    otherTwo = AI.OtherClassification.otherCat(strongClassifier, GMDNname, GMDNdesc, listOfNine)
+    print(otherTwo)
+
+    outtxtfile = 'fullmapping_' + str(int(itonum)) + '.txt'
+    MAPPING = open(outtxtfile, "w", encoding="utf-8")
     for i in range(4):
         g.add((rdflib.URIRef("http://example.org/" + GMDNID.rstrip()), rdflib.URIRef("http://example.org/" + bestNine[i][1]), rdflib.Literal(bestNine[i][0])))
         MAPPING.write(GMDNID.rstrip() + " " + bestNine[i][1] + " " + str(bestNine[i][0]))
         MAPPING.write("\n")
 
-
-    otherTwo = AI.OtherClassification.otherCat(strongClassifier, GMDNname, GMDNdesc,listOfNine)
-    print(otherTwo)
     for i in range(2):
         g.add((rdflib.URIRef("http://example.org/" + GMDNID.rstrip()), rdflib.URIRef("http://example.org/" + otherTwo[i][1]), rdflib.Literal(otherTwo[i][0])))
         MAPPING.write(GMDNID.rstrip() + " " + otherTwo[i][1] + " " + str(otherTwo[i][0]))
