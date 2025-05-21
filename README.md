@@ -3,7 +3,7 @@
 Program for mapping GMDN items to EMDN hierarchy using pre-trained LLM.
 Built with the workflow from [Huggingface](https://huggingface.co/), so LLMs available on the Huggingface Hub work natively.
 
-The .venv directory contains a virtual Environment with all required dependencies.
+The [.venv](https://drive.google.com/file/d/16zKJRDp92oVkcUQ3yIZevieyb4OiJ0Fa/edit) directory contains a virtual Environment with all required dependencies.
 
 ### Run Locally
 
