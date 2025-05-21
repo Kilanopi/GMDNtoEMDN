@@ -1,10 +1,9 @@
 from lxml import etree
-
 outp = open('PreProcessing/output.txt', "w", encoding="utf-8")
 idlist= list()
 string="//*"
-for j in range(188):
-    file1 =  'Input/20250304/FULLDownload_Part' + str(j+1) + '_Of_188_2025-03-03.xml' #TODO change this so it works with all dates
+for j in range(188):    #you need to change this number to the amount of files you want to extract
+    file1 =  'Input/20250304/FULLDownload_Part' + str(j+1) + '_Of_188_2025-03-03.xml' #You need to change this line to work with the names of your Input data
     print(file1)
     tree = etree.parse(file1)
     elem = tree.getroot()

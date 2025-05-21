@@ -89,9 +89,7 @@ def otherCat(classifier, GMDNname, GMDNdesc, ListOfNine):
                 if back[1] == line.rstrip():
                     back = (back[0], remember)
             k = k + 1
-
         Ninelist.append(back)
-
     Ninelist.sort(reverse=True)
     topList.append(Ninelist[0])
     topList.sort(reverse=True)

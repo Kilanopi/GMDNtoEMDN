@@ -15,7 +15,7 @@ def zeroShot(classifier, GMDNname, GMDNdesc, EMDNprefix):
         return EMDNprefix
     newlist = []
     i = 0
-    for cat in leafList:  # TODO better to split the string -> radiOTHERapy
+    for cat in leafList:
         if "single-use" in GMDNname and "REUSABLE" in cat and not "SINGLE-USE" in cat:
             newlist.append(cat)
         elif "reusable" in GMDNname and "SINGLE-USE" in cat and not "REUSABLE" in cat:

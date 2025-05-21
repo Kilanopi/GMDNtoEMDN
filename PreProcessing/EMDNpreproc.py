@@ -1,12 +1,8 @@
 import pandas as pd
-
-# read by default 1st sheet of an excel file
-dataframe1 = pd.read_excel('Input/EMDNV2.xlsx') #TODO find out how to make it find this automatically
-
+dataframe1 = pd.read_excel('Input/EMDNV2.xlsx')
 outp = open('PreProcessing/EMDNoutput.txt', "w", encoding="utf-8")
 liste = dataframe1.values.tolist()
 i=0
-
 for x in liste:
     if i < 1:
         print(x)

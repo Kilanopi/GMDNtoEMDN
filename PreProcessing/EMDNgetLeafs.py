@@ -32,7 +32,6 @@ def recme(prefix):
     else:
         for leaf in leaflist:
             recme(leaf)
-
 Singles=[]
 for line in inpt.readlines():
     if len(line.rstrip()) == 1:

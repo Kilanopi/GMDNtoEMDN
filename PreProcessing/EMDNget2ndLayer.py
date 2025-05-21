@@ -1,12 +1,10 @@
 inpt = open("PreProcessing/EMDNoutput.txt","r", encoding="utf-8")
 outp = open('PreProcessing/EMDN2ndLayer.txt', "w", encoding="utf-8")
 outp2 = open('PreProcessing/EMDNZ12.txt', "w", encoding="utf-8")
-
 FirstList = []
 for line in inpt.readlines():
     if len(line.rstrip()) == 1:
         FirstList.append(line.rstrip())
-
 for cat in FirstList:
     inpt.seek(0)
     gimmenext = False
@@ -23,7 +21,6 @@ for cat in FirstList:
             gimmenext = True
             rember = line.rstrip()
         j=j+1
-
 inpt.seek(0)
 gimmenext = False
 rember = ""

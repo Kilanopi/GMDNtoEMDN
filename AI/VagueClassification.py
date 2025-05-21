@@ -9,7 +9,7 @@ def nineCats(classifier, GMDNname, GMDNdesc):
         j = j + 1
     newlist = []
     i=0
-    for cat in catlist: #TODO better to split the string -> radiOTHERapy
+    for cat in catlist:
         if "single-use" in GMDNname and "REUSABLE" in cat and not "SINGLE-USE" in cat:
             newlist.append(cat)
         elif "reusable" in GMDNname and "SINGLE-USE" in cat and not "REUSABLE" in cat:
@@ -36,7 +36,7 @@ def nineCats(classifier, GMDNname, GMDNdesc):
     Z12=False
     for thing in topList:
         if thing[1] == "INSTRUMENTS FOR FUNCTIONAL EXPLORATIONS AND THERAPEUTIC INTERVENTIONS":
-            topList.pop(i) #TODO find a way to look through Z12 seperately
+            topList.pop(i)
             Z12 = True
             break
         i=i+1
